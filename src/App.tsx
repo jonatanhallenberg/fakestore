@@ -15,7 +15,6 @@ const App = () => {
   const nextCartItemId = cartItems.length ? cartItems[cartItems.length - 1].id + 1 : 1;
 
   const addProductToCart = (product: IProduct) => {
-    console.log(cartItems, product);
     const existingCartItem = cartItems.find(cartItem => cartItem.product.id === product.id);
     if (existingCartItem) {
       //Produkten finns redan i varukorgen -> quantity ska ökas med 1
