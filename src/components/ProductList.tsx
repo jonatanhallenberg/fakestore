@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { IProduct } from '../types';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { addProductToCart } from '../feature/cart/cartSlice';
 
 interface ProductListProps {
-    products: IProduct[],
-    addProductToCart: (product: IProduct) => void
+    products: IProduct[]
 }
 
 const renderProductBox = (product: IProduct, addProductToCart: (product: IProduct) => void) => (
@@ -20,16 +21,19 @@ const renderProductBox = (product: IProduct, addProductToCart: (product: IProduc
     </Card>
 )
 
-const ProductList = ({ products, addProductToCart }: ProductListProps) => (
-    <Container>
-        <Row>
-            {products.map(product => (
-                <Col key={product.id} md={3}>
-                    { renderProductBox(product, addProductToCart)}
-                </Col>
-            ))}
-        </Row>
-    </Container>
-)
+const ProductList = ({ products }: ProductListProps) => {
+    const dispatch = useDispatch();
+    return (
+        <Container>
+            <Row>
+                {products.map(product => (
+                    <Col key={product.id} md={3}>
+                        {renderProductBox(product, (product: IProduct) => dispatch(addProductToCart(product)))}
+                    </Col>
+                ))}
+            </Row>
+        </Container>
+    )
+}
 
 export default ProductList;

@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import ProductList from './ProductList';
 import { IProduct } from '../types';
+import { useDispatch } from 'react-redux';
+import { fetchProducts } from '../feature/products/productsSlice';
+import { useSelector } from 'react-redux';
 
-interface ProductsType {
-    addProductToCart: (product: IProduct) => void;
-}
-
-const Products = ({ addProductToCart }: ProductsType) => {
-
-    const [products, setProducts] = useState([]);
+const Products = () => {
+    const products = useSelector((state: any) => state.products.items);
+    const dispatch = useDispatch();
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(res => res.json())
-            .then(data => setProducts(data))
+        dispatch(fetchProducts());
     }, []);
 
-    return products && <ProductList products={products} addProductToCart={addProductToCart} />
+    return products && <ProductList products={products} />
 
 }
 
