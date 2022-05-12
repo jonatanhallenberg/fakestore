@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Container, Row, Col } from 'react-bootstrap';
-import Products from './components/Products';
-import Cart from './components/Cart';
-import { ICartItem, IProduct } from './types';
-import { useSelector } from 'react-redux';
+import Products from './feature/products/Products';
+import Cart from './feature/cart/Cart';
 
 const App = () => {
 

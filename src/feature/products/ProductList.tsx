@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import { IProduct } from '../types';
+import { IProduct } from './IProduct';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { addProductToCart } from '../feature/cart/cartSlice';
-
+import { addProductToCart } from '../cart/cartSlice';
+import { useAppDispatch } from '../../app/hooks';
 interface ProductListProps {
     products: IProduct[]
 }
@@ -16,13 +14,14 @@ const renderProductBox = (product: IProduct, addProductToCart: (product: IProduc
             <Card.Text>
                 {product.category}
             </Card.Text>
+            <Card.Text>{product.price} kr</Card.Text>
             <Button variant="primary" onClick={() => addProductToCart(product)}>Lägg i varukorg</Button>
         </Card.Body>
     </Card>
 )
 
 const ProductList = ({ products }: ProductListProps) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     return (
         <Container>
             <Row>

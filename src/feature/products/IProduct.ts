@@ -9,9 +9,3 @@ export interface IProduct {
         count: number
     }
 }
-
-export interface ICartItem {
-    id: number,
-    quantity: number,
-    product: IProduct
-}
